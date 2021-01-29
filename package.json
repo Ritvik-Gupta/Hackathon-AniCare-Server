@@ -1,0 +1,32 @@
+{
+	"name": "hackathon-pets",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"server": "set EXT=js && node dist/src/index",
+		"start": "set EXT=ts && ts-node src/index",
+		"dev": "set EXT=ts && ts-node-dev --rs src/index"
+	},
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"apollo-server-express": "^2.19.2",
+		"argon2": "^0.27.1",
+		"class-validator": "^0.13.1",
+		"cors": "^2.8.5",
+		"dotenv": "^8.2.0",
+		"express": "^4.17.1",
+		"express-session": "^1.17.1",
+		"firebase-admin": "^9.4.2",
+		"graphql": "^15.5.0",
+		"reflect-metadata": "^0.1.13",
+		"type-graphql": "^1.1.1"
+	},
+	"devDependencies": {
+		"@types/express-session": "^1.17.3",
+		"ts-node": "^9.1.1",
+		"ts-node-dev": "^1.1.1",
+		"typescript": "^4.1.3"
+	}
+}
