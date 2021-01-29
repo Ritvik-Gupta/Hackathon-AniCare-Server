@@ -8,13 +8,6 @@ import "reflect-metadata";
 import { buildSchema } from "type-graphql";
 import { customFormatError, DB } from "./service";
 
-// db.collection("posts")
-// 	.add({
-// 		title: "Title 2",
-// 		content: "Content 2",
-// 	})
-// 	.then(() => console.log("DONE"));
-
 (async () => {
 	dotenv.config();
 
