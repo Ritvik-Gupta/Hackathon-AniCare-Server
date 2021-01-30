@@ -85,6 +85,10 @@ import { customFormatError } from "./service/customOptions";
 	// 	})
 	// );
 
+	app.get("/try", (_, res) => {
+		res.json({ try: "This is to try something" });
+	});
+
 	apolloServer.applyMiddleware({ app, cors: false });
 	app.listen(process.env.PORT, () => {
 		console.log("\n\nGraphql Server Up and Running on");
