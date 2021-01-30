@@ -8,19 +8,19 @@ import { Container } from "typedi";
 import { createConnection, useContainer } from "typeorm";
 import { customFormatError } from "./service/customOptions";
 
+const isProd = () => process.env.NODE_ENV === "production";
+const DIR = isProd() ? "dist" : "src";
+const EXT = isProd() ? "js" : "ts";
+
+console.log("Current DIR :\t", DIR);
+console.log("Current EXT :\t", EXT);
+console.log("Current NODE_ENV :\t", isProd());
+console.log("Current DATABASE_URL :\t", process.env.DATABASE_URL);
+console.log("Current PORT :\t", process.env.PORT);
+
 (async () => {
 	dotenv.config();
 	useContainer(Container);
-	const isProd = () => process.env.NODE_ENV === "production";
-
-	const DIR = isProd() ? "dist" : "src";
-	const EXT = isProd() ? "js" : "ts";
-
-	console.log("Current DIR :\t", DIR);
-	console.log("Current EXT :\t", EXT);
-	console.log("Current NODE_ENV :\t", isProd());
-	console.log("Current DATABASE_URL :\t", process.env.DATABASE_URL);
-	console.log("Current PORT :\t", process.env.PORT);
 
 	await createConnection({
 		type: "postgres",
