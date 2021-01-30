@@ -5,7 +5,7 @@
 	"main": "src/main.ts",
 	"scripts": {
 		"heroku-postbuild": "tsc",
-		"start": "set DIR=dist && set EXT=js && node dist/main",
+		"start": "node dist/main",
 		"server": "ts-node src/main",
 		"dev": "ts-node-dev --rs src/main"
 	},

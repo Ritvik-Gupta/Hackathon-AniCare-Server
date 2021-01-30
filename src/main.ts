@@ -11,20 +11,21 @@ import { customFormatError } from "./service/customOptions";
 (async () => {
 	dotenv.config();
 	useContainer(Container);
+	const isProd = () => process.env.NODE_ENV === "production";
 
-	console.log("Current DIR :\t", process.env.DIR);
-	console.log("Current EXT :\t", process.env.EXT);
+	const DIR = isProd() ? "dist" : "src";
+	const EXT = isProd() ? "js" : "ts";
+
 	console.log("Current NODE_ENV :\t", process.env.NODE_ENV);
 	console.log("Current DATABASE_URL :\t", process.env.DATABASE_URL);
 	console.log("Current PORT :\t", process.env.PORT);
-
-	const DIR = process.env.DIR?.trimEnd();
-	const EXT = process.env.EXT?.trimEnd();
+	console.log("Current DIR :\t", DIR);
+	console.log("Current EXT :\t", EXT);
 
 	await createConnection({
 		type: "postgres",
 		url: process.env.DATABASE_URL,
-		synchronize: process.env.NODE_ENV !== "production",
+		synchronize: !isProd(),
 		logging: true,
 		entities: [`${DIR}/entity/**/*.ent.${EXT}`],
 		migrations: [`${DIR}/migration/**/*.${EXT}`],
