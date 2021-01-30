@@ -4,8 +4,9 @@
 	"description": "",
 	"main": "src/main.ts",
 	"scripts": {
-		"server": "set DIR=dist && set EXT=js && node dist/main",
-		"start": "ts-node src/main",
+		"heroku-postbuild": "tsc",
+		"start": "npm run heroku-postbuild && set DIR=dist && set EXT=js && node dist/main",
+		"server": "ts-node src/main",
 		"dev": "ts-node-dev --rs src/main"
 	},
 	"author": "",
