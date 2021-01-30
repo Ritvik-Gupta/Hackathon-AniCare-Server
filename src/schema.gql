@@ -147,7 +147,7 @@ type Query {
   filterPets(petType: PetType!): [Pet!]!
   pet(petId: ID!): Pet
   allUsers: [User!]!
-  user(userId: ID!): User
+  user(userId: ID, email: String): User
 }
 
 type Mutation {

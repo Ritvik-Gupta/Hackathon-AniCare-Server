@@ -15,7 +15,7 @@ export class UserHollow extends Address {
 	name: string;
 
 	@Field(() => String)
-	@Column({ type: "varchar" })
+	@Column({ type: "varchar", unique: true })
 	email: string;
 
 	@Field(() => String, { nullable: true })
@@ -38,8 +38,12 @@ export class User extends UserHollow {
 @ArgsType()
 export class UserArgs implements Partial<UserHollow> {
 	@IsUUID()
-	@Field(() => ID)
-	userId: string;
+	@Field(() => ID, { nullable: true })
+	userId?: string;
+
+	@IsEmail()
+	@Field(() => String, { nullable: true })
+	email?: string;
 }
 
 @InputType()

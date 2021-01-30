@@ -18,16 +18,19 @@ export class UserResolver {
 	@Query(() => User, { nullable: true })
 	user(
 		@FieldPath() fieldPath: normalizedFieldPaths,
-		@Args(() => UserArgs) { userId }: UserArgs
+		@Args(() => UserArgs) { userId, email }: UserArgs
 	): Promise<User | undefined> {
-		return this.userRepo
-			.getPopulatedQuery(fieldPath)
-			.where(`${fieldPath.parent}.userId = :userId`, { userId })
-			.getOne();
+		const query = this.userRepo.getPopulatedQuery(fieldPath);
+		if (userId !== undefined) {
+			return query.where(`${fieldPath.parent}.userId = :userId`, { userId }).getOne();
+		} else if (email !== undefined) {
+			return query.where(`${fieldPath.parent}.email = :email`, { email }).getOne();
+		} else throw Error("Atleast one Field is required");
 	}
 
 	@Mutation(() => UserHollow)
-	addUser(@Arg("user", () => UserInput) userInp: UserInput): Promise<UserHollow> {
+	async addUser(@Arg("user", () => UserInput) userInp: UserInput): Promise<UserHollow> {
+		await this.userRepo.ifNotDefined({ email: userInp.email });
 		return this.userRepo.create(userInp);
 	}
 }
