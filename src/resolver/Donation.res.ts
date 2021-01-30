@@ -12,6 +12,7 @@ export class DonationResolver {
 
 	@Query(() => [Donation])
 	allDonations(@FieldPath() fieldPath: normalizedFieldPaths): Promise<Donation[]> {
+		console.log(fieldPath);
 		return this.donationRepo.getPopulatedQuery(fieldPath).getMany();
 	}
 
