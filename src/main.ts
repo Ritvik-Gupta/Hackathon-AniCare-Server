@@ -8,20 +8,19 @@ import { Container } from "typedi";
 import { createConnection, useContainer } from "typeorm";
 import { customFormatError } from "./service/customOptions";
 
+dotenv.config();
+const isProd = () => process.env.NODE_ENV === "production";
+const DIR = isProd() ? "dist" : "src";
+const EXT = isProd() ? "js" : "ts";
+
+console.log("Current DIR :\t", DIR);
+console.log("Current EXT :\t", EXT);
+console.log("Current NODE_ENV :\t", isProd());
+console.log("Current DATABASE_URL :\t", process.env.DATABASE_URL);
+console.log("Current PORT :\t", process.env.PORT);
+
 (async () => {
-	dotenv.config();
 	useContainer(Container);
-	const isProd = () => process.env.NODE_ENV === "production";
-
-	const DIR = isProd() ? "dist" : "src";
-	const EXT = isProd() ? "js" : "ts";
-
-	console.log("Current DIR :\t", DIR);
-	console.log("Current EXT :\t", EXT);
-	console.log("Current NODE_ENV :\t", isProd());
-	console.log("Current DATABASE_URL :\t", process.env.DATABASE_URL);
-	console.log("Current PORT :\t", process.env.PORT);
-
 	await createConnection({
 		type: "postgres",
 		url: process.env.DATABASE_URL,
@@ -70,24 +69,6 @@ import { customFormatError } from "./service/customOptions";
 			credentials: true,
 		})
 	);
-	// app.use(
-	// 	session({
-	// 		name: process.env.COOKIE_NAME,
-	// 		secret: process.env.SESSION_SECRET as string,
-	// 		cookie: {
-	// 			maxAge: 1000 * 60 * 60 * 24,
-	// 			httpOnly: true,
-	// 			sameSite: "lax",
-	// 			secure: process.env.NODE_ENV === "production",
-	// 		},
-	// 		saveUninitialized: false,
-	// 		resave: false,
-	// 	})
-	// );
-
-	app.get("/try", (_, res) => {
-		res.json({ try: "This is to try something" });
-	});
 
 	apolloServer.applyMiddleware({ app, cors: false });
 	app.listen(process.env.PORT, () => {
