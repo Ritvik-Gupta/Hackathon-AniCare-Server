@@ -18,7 +18,7 @@ import { customFormatError } from "./service/customOptions";
 
 	console.log("Current DIR :\t", DIR);
 	console.log("Current EXT :\t", EXT);
-	console.log("Current NODE_ENV :\t", process.env.NODE_ENV);
+	console.log("Current NODE_ENV :\t", isProd());
 	console.log("Current DATABASE_URL :\t", process.env.DATABASE_URL);
 	console.log("Current PORT :\t", process.env.PORT);
 
