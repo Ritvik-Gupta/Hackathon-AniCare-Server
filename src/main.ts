@@ -11,6 +11,13 @@ import { customFormatError } from "./service/customOptions";
 (async () => {
 	dotenv.config();
 	useContainer(Container);
+
+	console.log("Current DIR :\t", process.env.DIR);
+	console.log("Current EXT :\t", process.env.EXT);
+	console.log("Current NODE_ENV :\t", process.env.NODE_ENV);
+	console.log("Current DATABASE_URL :\t", process.env.DATABASE_URL);
+	console.log("Current PORT :\t", process.env.PORT);
+
 	const DIR = process.env.DIR?.trimEnd();
 	const EXT = process.env.EXT?.trimEnd();
 
