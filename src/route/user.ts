@@ -2,15 +2,15 @@ import express from "express";
 import { getRepository } from "typeorm";
 import { User } from "../entity";
 
-const router = express.Router();
+export const userRouter = express.Router();
 const userRepo = getRepository(User);
 
-router.get("/all", async (_, res) => {
+userRouter.get("/all", async (_, res) => {
 	const users = await userRepo.find();
 	res.json({ data: users });
 });
 
-router.post("/add", async (req, res) => {
+userRouter.post("/add", async (req, res) => {
 	const { city, country, email, name, phone, photoUrl } = req.body;
 	if (city === undefined) return res.status(400).json({ error: "City must be defined" });
 	if (country === undefined) return res.status(400).json({ error: "Country must be defined" });
