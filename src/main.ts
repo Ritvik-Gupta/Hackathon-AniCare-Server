@@ -6,6 +6,7 @@ import "reflect-metadata";
 import { buildSchema } from "type-graphql";
 import { Container } from "typedi";
 import { createConnection, useContainer } from "typeorm";
+import { userRouter } from "./route";
 import { customFormatError } from "./service/customOptions";
 
 dotenv.config();
@@ -69,6 +70,8 @@ console.log("Current PORT :\t", process.env.PORT);
 			credentials: true,
 		})
 	);
+
+	app.use("/user", userRouter);
 
 	apolloServer.applyMiddleware({ app, cors: false });
 	app.listen(process.env.PORT, () => {
