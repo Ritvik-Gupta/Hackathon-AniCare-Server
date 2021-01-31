@@ -71,6 +71,7 @@ console.log("Current PORT :\t", process.env.PORT);
 		})
 	);
 
+	app.use(express.json());
 	app.use("/user", userRouter);
 
 	apolloServer.applyMiddleware({ app, cors: false });
