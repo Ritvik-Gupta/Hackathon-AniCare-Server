@@ -3,9 +3,9 @@ import { getRepository } from "typeorm";
 import { User } from "../entity";
 
 export const userRouter = express.Router();
-const userRepo = getRepository(User);
 
 userRouter.get("/all", async (_, res) => {
+	const userRepo = getRepository(User);
 	const users = await userRepo.find();
 	res.json({ data: users });
 });
@@ -18,6 +18,7 @@ userRouter.post("/add", async (req, res) => {
 	if (name === undefined) return res.status(400).json({ error: "Name must be defined" });
 	if (photoUrl === undefined) return res.status(400).json({ error: "Photo Url must be defined" });
 
+	const userRepo = getRepository(User);
 	const user = await userRepo.save(
 		userRepo.create({ city, country, email, name, phone, photoUrl })
 	);
